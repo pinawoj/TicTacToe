@@ -155,9 +155,69 @@ public class Game {
         String result = "None";
         //Student code goes here ...
 
+        if (checkColumns(grid, 'o') || checkRows(grid, 'o') || checkDiagonal(grid, 'o')) {
+            result = "O wins";
+        } else if (checkColumns(grid, 'x') || checkRows(grid, 'x') || checkDiagonal(grid, 'x')) {
+            result = "X wins";
+        } else if (checkTie(grid)) {
+            result = "Tie";
+        }
+
         return result;
     }
 
+
+    private boolean checkColumns(char[][] grid, char player) {
+
+        for (int i = 0; i < grid.length; i++) {
+            int count = 0;
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[j][i] != player) {
+                    break;
+                } count++;
+            } if (count == grid.length) {
+                return true;
+            } }
+
+        return false;
+    }
+
+    private boolean checkRows(char[][] grid, char player) {
+
+        for (int i = 0; i < grid.length; i++) {
+            int count = 0;
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] != player) {
+                    break;
+                } count++;
+            } if (count == grid[i].length) {
+                return true;
+            } }
+
+        return false;
+    }
+
+    private boolean checkDiagonal(char[][] grid, char player) {
+
+        if (grid[0][0] == player && grid[1][1] == player && grid[2][2] == player) {
+            return true;
+        } else if (grid[0][2] == player && grid[1][1] == player && grid[2][0] == player) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkTie(char[][] grid) {
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == '-') {
+                    return false;
+                } } }
+
+        return true;
+    }
 
     /**
      * Main function
